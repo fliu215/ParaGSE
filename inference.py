@@ -60,10 +60,10 @@ def get_dataset_filelist(input_training_wav_list):
 def inference(a,h):
     generator = ParaGSE(code_size=h.codebook_size,num_quantize=h.num_quantize, num_blocks=1).to(device)
     mdct_encoder = Encoder(h).to(device)
-    state_dict_encoder = load_checkpoint('/home/fliu/mnt230_train/checkpoint/MDCT_16k_group_4vq_8codedim_256codesize/encoder_00700000', device)
+    state_dict_encoder = load_checkpoint('G_MDCTCODEC/checkpoint/encoder', device)
     mdct_encoder.load_state_dict(state_dict_encoder['encoder'])
     mdct_decoder = Decoder(h).to(device)
-    state_dict_decoder = load_checkpoint('/home/fliu/mnt230_train/checkpoint/MDCT_16k_group_4vq_8codedim_256codesize/decoder_00700000', device)
+    state_dict_decoder = load_checkpoint('G_MDCTCODEC/checkpoint/decoder', device)
     mdct_decoder.load_state_dict(state_dict_decoder['decoder'])
 
     state_dict = load_checkpoint(h.checkpoint_file, device)
@@ -108,8 +108,8 @@ def main():
     print('Initializing Inference Process..')
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--test_noise_wav', default='/home/fliu/mnt230_train/data/voice_bank/noisy_testset_wav_rne_16k')
-    parser.add_argument('--output_dir', default='/home/fliu/mnt230_train/data/genhancer/ICLR_group_enh_embedding_v3_stft_drne_vctk/')
+    parser.add_argument('--test_noise_wav', default='')
+    parser.add_argument('--output_dir', default='')
     a = parser.parse_args()
 
     config_file = 'config.json'
