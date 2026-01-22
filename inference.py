@@ -2,7 +2,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import glob
 import os
-import dac
 import sys
 sys.path.append('G_MDCTCodec')
 import argparse
@@ -18,7 +17,6 @@ from models import ParaGSE
 import soundfile as sf
 import librosa
 import numpy as np
-from audiotools import AudioSignal
 from rich.progress import track
 import matplotlib.pyplot as plt
 import time
@@ -60,13 +58,13 @@ def get_dataset_filelist(input_training_wav_list):
 def inference(a,h):
     generator = ParaGSE(code_size=h.codebook_size,num_quantize=h.num_quantize, num_blocks=1).to(device)
     mdct_encoder = Encoder(h).to(device)
-    state_dict_encoder = load_checkpoint('G_MDCTCODEC/checkpoint/encoder', device)
+    state_dict_encoder = load_checkpoint('/train/aiyang/checkpoint/MDCT_16k_group_4vq_8codedim_256codesize/encoder_00700000', device)
     mdct_encoder.load_state_dict(state_dict_encoder['encoder'])
     mdct_decoder = Decoder(h).to(device)
-    state_dict_decoder = load_checkpoint('G_MDCTCODEC/checkpoint/decoder', device)
+    state_dict_decoder = load_checkpoint('/train/aiyang/checkpoint/MDCT_16k_group_4vq_8codedim_256codesize/decoder_00700000', device)
     mdct_decoder.load_state_dict(state_dict_decoder['decoder'])
 
-    state_dict = load_checkpoint(h.checkpoint_file, device)
+    state_dict = load_checkpoint(a.checkpoint_file, device)
     generator.load_state_dict(state_dict['generator'])
 
     test_indexes = get_dataset_filelist(a.test_noise_wav)
@@ -108,8 +106,9 @@ def main():
     print('Initializing Inference Process..')
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--test_noise_wav', default='')
-    parser.add_argument('--output_dir', default='')
+    parser.add_argument('--test_noise_wav', default='/train/aiyang/data/voice_bank/noisy_testset_wav_rne_16k')
+    parser.add_argument('--output_dir', default='/train/aiyang/data/genhancer/ParaGSE/')
+    parser.add_argument('--checkpoint_file', default='/train/aiyang/checkpoint/ParaGSE/g_00010000')
     a = parser.parse_args()
 
     config_file = 'config.json'
