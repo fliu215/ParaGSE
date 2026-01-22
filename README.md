@@ -24,4 +24,4 @@ conda activate paragse
 cd ParaGSE
 pip install -r requirements.txt
 ```
-3. Download and extract the [VoiceBank+DEMAND dataset](https://datashare.ed.ac.uk/handle/10283/1942).Data processing instructions can be found in ```data_prepare```. Resample all wav files to 16 kHz.
+3. Download and extract the [VoiceBank+DEMAND dataset](https://datashare.ed.ac.uk/handle/10283/1942).Data processing instructions can be found in [this](https://github.com/fliu215/UDSE_Code/tree/main/data_prepare). Resample all wav files to 16 kHz.
