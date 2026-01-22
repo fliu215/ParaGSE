@@ -10,7 +10,7 @@ on degraded spectral features, and ultimately reconstructs clean speech via the 
 to both discriminative and generative baselines, under a wide range of distortions including noise, reverberation, band-limiting, and their mixtures. Furthermore, empowered by parallel computation in token prediction, ParaGSE attains about a 1.5-fold improvement
 in generation efficiency on CPU compared with serial generative speech enhancement approaches.
 
-**We provide our implementation as open source in this repository. Audio samples can be found at the [demo website](https://anonymity225.github.io/ParaGSE/).**
+**Audio samples can be found at the [demo website](https://anonymity225.github.io/ParaGSE/).**
 
 ## Model Structure
 ![model](figures/model.png)
