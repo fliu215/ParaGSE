@@ -36,10 +36,10 @@ def train(rank, a, h):
 
     generator = ParaGSE(input_dim=513*2, code_size=h.codebook_size, num_quantize=h.num_quantize, num_blocks=1)
     mdct_encoder = Encoder(h).to(device)
-    state_dict_encoder = load_checkpoint('/train/aiyang/checkpoint/MDCT_16k_group_4vq_8codedim_256codesize/encoder_00700000', device)
+    state_dict_encoder = load_checkpoint('G_MDCTCodec/checkpoint/encoder', device)
     mdct_encoder.load_state_dict(state_dict_encoder['encoder'])
     mdct_decoder = Decoder(h).to(device)
-    state_dict_decoder = load_checkpoint('/train/aiyang/checkpoint/MDCT_16k_group_4vq_8codedim_256codesize/decoder_00700000', device)
+    state_dict_decoder = load_checkpoint('G_MDCTCodec/checkpoint/decoder', device)
     mdct_decoder.load_state_dict(state_dict_decoder['decoder'])
 
     for p in mdct_encoder.parameters():
@@ -248,11 +248,11 @@ def main():
     parser.add_argument('--group_name', default=None)
     parser.add_argument('--gpu_num', default=0)
     parser.add_argument('--config', default='config.json')
-    parser.add_argument('--input_train_clean_list', default='/train/aiyang/data/voice_bank/clean_trainset_wav_16k')
-    parser.add_argument('--input_train_noise_list', default='/train/aiyang/data/voice_bank/noisy_trainset_wav_rne_16k')
-    parser.add_argument('--input_validation_clean_list', default='/train/aiyang/data/voice_bank/clean_testset_wav_16k')
-    parser.add_argument('--input_validation_noise_list', default='/train/aiyang/data/voice_bank/noisy_testset_wav_rne_16k')
-    parser.add_argument('--checkpoint_path', default='/train/aiyang/checkpoint/ParaGSE')
+    parser.add_argument('--input_train_clean_list', default='../data')
+    parser.add_argument('--input_train_noise_list', default='../data')
+    parser.add_argument('--input_validation_clean_list', default='../data')
+    parser.add_argument('--input_validation_noise_list', default='../data')
+    parser.add_argument('--checkpoint_path', default='../checkpoint/ParaGSE')
 
     a = parser.parse_args()
 
