@@ -6,7 +6,7 @@
     "adam_b2": 0.95,
     "lr_decay": 0.97,
     "seed": 1234,
-    "warmup_steps": 20000,
+    "warmup_steps": 10000,
     
     "num_quantize": 4,
     "codebook_size": 256, 
