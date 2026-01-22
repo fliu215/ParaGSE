@@ -1,0 +1,68 @@
+{
+    "input_training_wav_list": "../data/libritts_degrad/train_clean",
+    "input_validation_wav_list": "../data/libritts_degrad/test_clean",
+    "test_input_wavs_dir":"../data/libritts_degrad/test_clean",
+    "test_input_latent_dir":"../Data_LJSpeech/mels/test",
+    "test_latent_output_dir":"output_latent",
+    "test_wav_output_dir":"../data/GMDCTCodec_libritts",
+
+    "batch_size": 48,
+    "learning_rate": 0.0002,
+    "adam_b1": 0.8,
+    "adam_b2": 0.99,
+    "lr_decay": 0.999,
+    "seed": 1234,
+    "training_epochs": 3100,
+    "stdout_interval":5,
+    "checkpoint_interval": 100000,
+    "summary_interval": 100,
+    "validation_interval": 100000,
+    "checkpoint_path": "../checkpoint/GMDCTCodec_libritts",
+    "checkpoint_file_load_Encoder": "../checkpoint/GMDCTCodec_libritts/encoder_00700000",
+    "checkpoint_file_load_Decoder": "../checkpoint/GMDCTCodec_libritts/decoder_00700000",
+
+    "AMP_Encoder_channel": 256,
+    "AMP_Encoder_resblock_kernel_sizes": [3,7,11],
+    "AMP_Encoder_resblock_dilation_sizes": [[1,3,5], [1,3,5], [1,3,5]],
+    "AMP_Encoder_input_conv_kernel_size": 7,
+    "AMP_Encoder_output_downconv_kernel_size": 7,
+
+    "PHA_Encoder_channel": 256,
+    "PHA_Encoder_resblock_kernel_sizes": [3,7,11],
+    "PHA_Encoder_resblock_dilation_sizes": [[1,3,5], [1,3,5], [1,3,5]],
+    "PHA_Encoder_input_conv_kernel_size": 7,
+    "PHA_Encoder_output_downconv_kernel_size": 7,
+
+    "AMP_Decoder_channel": 256,
+    "AMP_Decoder_resblock_kernel_sizes": [3,7,11],
+    "AMP_Decoder_resblock_dilation_sizes": [[1,3,5], [1,3,5], [1,3,5]],
+    "AMP_Decoder_input_upconv_kernel_size": 16,
+    "AMP_Decoder_output_conv_kernel_size": 7,
+
+    "PHA_Decoder_channel": 256,
+    "PHA_Decoder_resblock_kernel_sizes": [3,7,11],
+    "PHA_Decoder_resblock_dilation_sizes": [[1,3,5], [1,3,5], [1,3,5]],
+    "PHA_Decoder_input_upconv_kernel_size": 16,
+    "PHA_Decoder_output_R_conv_kernel_size": 7,
+    "PHA_Decoder_output_I_conv_kernel_size": 7,
+
+    "latent_output_conv_kernel_size": 7,
+    "latent_input_conv_kernel_size": 7,
+
+    "ratio": 8,
+    "latent_dim": 32,
+    "num_quantize": 4,
+    "codebook_size": 256,
+
+
+    "segment_size": 7960,
+    "num_mels": 80,
+    "n_fft": 1024,
+    "hop_size": 40,
+    "win_size": 320,
+    "num_mels_for_loss": 80,
+
+    "sampling_rate": 16000,
+
+    "num_workers": 4
+}
