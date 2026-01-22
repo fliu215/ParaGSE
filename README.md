@@ -14,3 +14,14 @@ in generation efficiency on CPU compared with serial generative speech enhanceme
 
 ## Model Structure
 ![model](figures/model.png)
+
+## Pre-requisites
+1. Clone this repository.
+2. Install requirements.
+```
+conda create -n paragse python=3.9
+conda activate paragse
+cd ParaGSE
+pip install -r requirements.txt
+```
+3. Download and extract the [VoiceBank+DEMAND dataset](https://datashare.ed.ac.uk/handle/10283/1942).Data processing instructions can be found in ```data_prepare```. Resample all wav files to 16 kHz.
