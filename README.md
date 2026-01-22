@@ -36,6 +36,9 @@ CUDA_VISIBLE_DEVICES=0 python train.py
 CUDA_VISIBLE_DEVICES=0 python inference.py --test_noise_wav your/path --output_dir save/path
 ```
 
+## Acknowledgements
+We referred to MDCTCodec and [UDSE](https://github.com/fliu215/UDSE_Code) to implement this.
+
 ## Citation
 ```
 @inproceedings{liu2026paragse,
