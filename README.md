@@ -33,7 +33,7 @@ CUDA_VISIBLE_DEVICES=0 python train.py
 
 ## Inference
 ```
-CUDA_VISIBLE_DEVICES=0 python inference.py --test_noise_wav your/path --output_dir save/path
+CUDA_VISIBLE_DEVICES=0 python inference.py --test_noise_wav your/path --output_dir save/path --checkpoint_file ckpt/path
 ```
 
 ## Acknowledgements
