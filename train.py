@@ -200,7 +200,7 @@ def train(rank, a, h):
                     generator.eval()
                     torch.cuda.empty_cache()
                     val_cross_err_tot = 0
-                    val_dnsmos_err_tot = 0
+                    val_mel_err_tot = 0
                     with torch.no_grad():
                         for j, batch in enumerate(validation_loader):
                             clean_audio, mix_audio = batch
@@ -219,20 +219,39 @@ def train(rank, a, h):
 
                             mix_in = preprocess(mix_audio, device)
                             _, noisy_token, _, _, _ = mdct_encoder(mix_in)
+                            B, _, T = noisy_token.size()
                             stft_fea = mag_pha_stft(mix_audio.squeeze(1))
                             prob = generator(noisy_token, stft_fea)
+
+                            token_g = torch.cat(prob, dim=-1)
+                            token_g = token_g.reshape(B, T, -1, h.codebook_size)
+                            token_g = F.softmax(token_g, dim=-1)
+                            token_g = torch.argmax(token_g, dim=-1).permute(0,2,1) 
+                            z, _, _ = mdct_encoder.quantizer.from_codes(token_g)
+                            audio_g,_ = mdct_decoder(z)
+                            audio_g = audio_g.cpu().numpy()
+                            mel_1 = mel_spectrogram(clean_audio.squeeze(1))
+                            mel_2 = mel_spectrogram(audio_g.squeeze(1))
+                            if mel_1.size(-1) != mel_2.size(-1):
+                                length = min(mel_1.size(-1),mel_2.size(-1))
+                                mel_1=mel_1[:,:,:length]
+                                mel_2=mel_2[:,:,:length]
 
                             loss_list = []
                             for i in range(h.num_quantize):
                                 loss_c = F.cross_entropy(prob[i].reshape(-1, h.codebook_size) / 1.0, clean_token_loss[i])
                                 loss_list.append(loss_c)
                             loss_cross = sum(loss_list) / h.num_quantize
+                            loss_mel = F.l1_loss(mel_1, mel_2)
 
                             val_cross_err_tot += loss_cross.item()
+                            val_mel_err_tot += loss_mel.item()
                             
 
                         val_cross_err = val_cross_err_tot / (j+1)
+                        val_mel_err = val_mel_err_tot / (j+1)
                         sw.add_scalar("Validation/Cross Loss", val_cross_err, steps)
+                        sw.add_scalar("Validation/Mel Loss", val_mel_err, steps)
                     generator.train()
             steps += 1
             scheduler_g.step()
