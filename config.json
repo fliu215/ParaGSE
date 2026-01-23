@@ -17,7 +17,7 @@
 
     "num_workers": 4,
 
-    "training_epochs":100,
+    "training_epochs":300,
     "stdout_interval":5,
     "checkpoint_interval": 10000,
     "summary_interval": 100,
