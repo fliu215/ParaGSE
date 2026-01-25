@@ -229,7 +229,6 @@ def train(rank, a, h):
                             token_g = torch.argmax(token_g, dim=-1).permute(0,2,1) 
                             z, _, _ = mdct_encoder.quantizer.from_codes(token_g)
                             audio_g,_ = mdct_decoder(z)
-                            audio_g = audio_g.cpu().numpy()
                             mel_1 = mel_spectrogram(clean_audio.squeeze(1))
                             mel_2 = mel_spectrogram(audio_g.squeeze(1))
                             if mel_1.size(-1) != mel_2.size(-1):
