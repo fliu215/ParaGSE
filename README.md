@@ -1,4 +1,4 @@
-# ParaGSE:Parallel Generative Speech Enhancement with Group-Vector-Quantization-Based neural Speech Codec
+# ParaGSE:Parallel Generative Speech Enhancement with Group-Vector-Quantization-Based Neural Speech Codec
 ### Fei Liu, Yang Ai
 #### Published in ICASSP 2026
 
