@@ -1,6 +1,7 @@
 # ParaGSE:Parallel Generative Speech Enhancement with Group-Vector-Quantization-Based Neural Speech Codec
 ### Fei Liu, Yang Ai
 #### Published in ICASSP 2026
+[![arXiv](https://img.shields.io/badge/arXiv-2510.09974-brightgreen.svg?style=flat-square)](https://arxiv.org/abs/2602.01793)
 
 **Abstract:** 
 Recently, generative speech enhancement has garnered considerable interest; however, existing approaches are hindered by excessive complexity, limited efficiency, and suboptimal speech quality. To overcome these challenges, this paper proposes a novel parallel
