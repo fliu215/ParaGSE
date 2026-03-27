@@ -7,7 +7,7 @@ import json
 import torch
 from utils import AttrDict
 from datasets import amp_pha_specturm, load_wav
-from models_500bps import Encoder, Decoder
+from models_codec import Encoder, Decoder
 import soundfile as sf
 import librosa
 import numpy as np
